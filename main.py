@@ -1,3 +1,23 @@
+
+def logger_with_path(path):
+    def logger(func):
+        def wrapper(*args, **kwargs):
+            from time import asctime as time
+            cur_time = time()
+            name = (func.__name__)
+            result = func(*args, **kwargs)
+
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(f'Time of call is {cur_time}\n')
+                f.write(f'Name of function is "{name}"\n')
+                f.write(f'Arguments are {args} and {kwargs}\n')
+                f.write(f'Result is {result}')
+        return wrapper
+    return logger
+
+path = input('Enter the saving path: ')
+
+@logger_with_path(path)
 def get_shop_list_by_dishes(dishes, person_count):
     shop_list = {}
     for dish in dishes:
@@ -34,7 +54,7 @@ for index in range(len(recipes_list)):
     next_line = index + 3 + lines
     cook_book[recipes_list[index]] = current_list
 
-# print(cook_book)
+
 get_shop_list_by_dishes(['Омлет', 'Утка по-пекински'], 1)
-# print(get_shop_list_by_dishes(['Омлет', 'Утка по-пекински'], 2))
+
 
