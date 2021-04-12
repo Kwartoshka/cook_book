@@ -12,6 +12,7 @@ def logger_with_path(path):
                 f.write(f'Name of function is "{name}"\n')
                 f.write(f'Arguments are {args} and {kwargs}\n')
                 f.write(f'Result is {result}')
+            return result
         return wrapper
     return logger
 
